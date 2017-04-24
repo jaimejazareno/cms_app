@@ -1,0 +1,40 @@
+<% unless product.categorizations.nil? %>
+  <% i = 0 %>
+  <% zx = product.categorys.count %>
+  <% l = 0 %>
+  <% product.categorys.each do |g| %>
+    <% if g.is_active %>
+
+    <% else %>
+
+      <% i+=1 %>
+
+    <% end %>
+
+  <% end %>
+
+  <% unless i>0 %>
+    <li>
+       
+      <%= link_to(product.name,product) %> 
+      <% product.categorys.each do |z| %>
+        <% if l < zx - 1 %>
+          <%= "#{z.name} | " %>
+
+        <% else %>
+          <%= z.name %>
+
+        <% end %>
+        <% l+=1 %>
+      <% end %>
+    
+    
+      <% if current_user.admin%>
+        <%= link_to "delete", product, method: :delete,data: { confirm: "You sure?" },class:"pull-right btn btn-danger" %>
+        <%= link_to "edit product", edit_product_path(product),class:"pull-right btn btn-primary" %>
+      <% end %>
+
+    </li>
+  <% end %>
+
+  <% end %>

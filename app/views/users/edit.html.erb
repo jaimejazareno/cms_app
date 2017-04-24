@@ -1,0 +1,43 @@
+<% provide(:title, "Edit user") %>
+
+<% if current_user?(@user) %>
+  <h1>Update your profile</h1>
+<% else %>
+  <h1>Update profile</h1>
+<% end %>
+
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :fname %>
+      <%= f.text_field :fname %>
+
+      <%= f.label :lname %>
+      <%= f.text_field :lname %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :username %>
+      <%= f.text_field :username %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirm Password" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar, accept:'image/*'  %>
+
+      <br>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+  
+  </div>
+</div>

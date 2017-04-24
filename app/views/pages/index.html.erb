@@ -1,0 +1,14 @@
+<% provide(:title, "Welcome Page") %>
+
+<div class="container">
+	<div class="text-center jumbotron">
+		<h1>Welcome to <i class="fakecolor">FAKE STORE</i></h1>
+		<% if signed_in? %>
+          <p><%= link_to('Go to your profile',current_user,class: "btn btn-warning") %>  </p>
+		<%else %>
+
+          <p><%= link_to('Sign Up', signup_path ,class: 'btn btn-warning') %></p>
+		<% end %>
+		
+	</div>
+</div>

@@ -1,0 +1,25 @@
+<% provide(:title, "Product Info") %>
+
+
+  <h1><%= @name %> </h1>
+
+
+
+<div class="text-center">
+
+
+  <%= link_to('Products', products_path, class: "btn btn-warning") %>
+  <%= link_to('Users', users_path , class: "btn btn-default") %>
+  <br>
+  <%= "Name: #{@product.name}" %>
+  <br>
+  <%= "Price: #{@product.price}" %>
+  <br>
+  Category: 
+  <% @product.categorys.each do |f| %>
+  <%= "#{f.name} | " %>
+  <% end %>
+  
+ 
+ 
+</div>

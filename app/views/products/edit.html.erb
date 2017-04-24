@@ -1,0 +1,36 @@
+<% provide(:title, "Edit Product") %>
+
+
+<h1>Edit Product</h1>
+
+<div class="row text-center">
+
+  <div class="span6 offset3">
+
+      <%= form_for(@product) do |f| %>
+
+        <%= render 'shared/errorp_messages' %>
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name %>
+      
+        <%= f.label :price, "Price" %>
+        <%= f.text_field :price %>
+       
+
+        
+      <%= f.collection_check_boxes :categories, Category.where(is_active:true), :id, :name do |m| %>
+      <%= m.check_box %> <%= m.label %>
+      <% end %>
+
+   
+        
+       
+        <br>
+        
+        <%= f.submit "Create product", class: "btn btn-large btn-primary" %>
+
+      <% end %>
+
+  </div>
+
+</div>

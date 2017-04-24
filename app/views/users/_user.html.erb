@@ -1,0 +1,16 @@
+
+<li>
+
+  <%= image_tag(user.avatar,width:150,height: 150) %> 
+  <%= link_to user.username, user %>
+  <% if !user.admin && !current_user?(user) && current_user.admin %>
+     <%= link_to "delete", user, method: :delete,data: { confirm: "You sure?" },class:"pull-right btn btn-danger" %>
+     <%= link_to "make admin", make_admin_path(user),class:"pull-right btn btn-success" %>
+     <%= link_to "edit account", edit_user_path(user),class:"pull-right btn btn-primary" %>
+
+  <% elsif user.admin && !current_user?(user) && current_user.admin %>
+      <%= link_to "delete", user, method: :delete,data: { confirm: "You sure?" },class:"pull-right btn btn-danger" %>
+
+  <% end %>
+
+</li>

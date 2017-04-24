@@ -1,0 +1,18 @@
+<% provide(:title, "Category Info") %>
+
+<h1><%= @name %> </h1>
+
+<div class="text-center">
+
+  <%= link_to('Products', products_path, class: "btn btn-warning") %>
+  <%= link_to('Users', users_path , class: "btn btn-default") %>
+  <br>
+  <%= "Name: #{@category.name}" %>
+  <br>
+  <% if @category.is_active %>
+    <%= "Status: Active" %>
+  <% else %>
+    <%= "Status: Not Active" %>
+  <% end  %>
+ 
+</div>
