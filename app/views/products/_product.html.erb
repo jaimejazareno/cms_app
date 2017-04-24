@@ -1,8 +1,8 @@
 <% unless product.categorizations.nil? %>
   <% i = 0 %>
-  <% zx = product.categorys.count %>
+  <% zx = product.categories.count %>
   <% l = 0 %>
-  <% product.categorys.each do |g| %>
+  <% product.categories.each do |g| %>
     <% if g.is_active %>
 
     <% else %>
@@ -17,7 +17,7 @@
     <li>
        
       <%= link_to(product.name,product) %> 
-      <% product.categorys.each do |z| %>
+      <% product.categories.each do |z| %>
         <% if l < zx - 1 %>
           <%= "#{z.name} | " %>
 

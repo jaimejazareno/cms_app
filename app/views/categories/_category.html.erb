@@ -1,11 +1,10 @@
 
 <li>
 
-  <%= link_to category.name, category %>	
+  <%= link_to category.name, category %> | <%= "Active: #{category.is_active}" %>
   <% if current_user.admin%>
      <%= link_to "delete", category, method: :delete,data: { confirm: "You sure?" },class:"pull-right btn btn-danger" %>
      <%= link_to "edit category", edit_category_path(category),class:"pull-right btn btn-primary" %>
-
   <% end %>
 
 </li>

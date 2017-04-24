@@ -20,28 +20,16 @@ class ProductsController < ApplicationController
   def create
    
     @product=Product.new(product_params)
-    i=0
+   
     params[:product][:categories].each do |f| 
-      @product.categorizations.build(product_id:@product.id,category_id:f)
-      if f==''
-
-      else
-        i+=1
-      end
-      @product.categories= @product.id
+      next if f == ''
+        @product.categorizations.build(category_id:f)
     end
     
-    if @product.save && i!=0
+    if @product.save 
       redirect_to products_path
     else
-      if i==0
-        @product.errors[:categories] = "Please select one category"
-        render 'new'
-
-      else
-        render 'new'
-      end
-      
+      render 'new'
     end
 
   end
@@ -51,29 +39,20 @@ class ProductsController < ApplicationController
   end
 
   def update
-    Categorization.where(product_id:@product).destroy_all
-    i=0
-    params[:product][:categories].each do |f| 
-      @product.categorizations.build(product_id:@product.id,category_id:f) 
-      if f==''
-
-      else
-        i+=1
-      end
-    end
-
-    if @product.update_attributes(product_params2)&& i!=0
-      redirect_to @product
+    if params[:product][:categories].first == '' && params[:product][:categories].last == ''
+      @product.errors[:categories] = "Please select at least one category"
+      render 'edit'
     else
-      if i==0
-        @product.errors[:categories] = "Please select one category"
-        render 'edit'
-
+      if @product.update_attributes(product_params)
+        params[:product][:categories].each do |f|
+          next if f == '' 
+            @product.categorizations.build(category_id:f) 
+          end
+        redirect_to @product
       else
         render 'edit'
       end
     end
-
   end
 
   def destroy
@@ -85,10 +64,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name,:price,categories:[])
-  end
-
-  def product_params2
     params.require(:product).permit(:name,:price)
   end
 
